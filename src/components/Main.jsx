@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "./Main.css";
 import WeatherCard from "./WeatherCard";
 import ItemCard from "./ItemCard";
@@ -19,5 +20,20 @@ function Main({ clothingItems, weatherData, onCardClick }) {
     </main>
   );
 }
+
+Main.propTypes = {
+  clothingItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired,
+      weather: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  weatherData: PropTypes.shape({
+    type: PropTypes.string,
+  }).isRequired,
+  onCardClick: PropTypes.func.isRequired,
+};
 
 export default Main;

@@ -1,5 +1,7 @@
+import PropTypes from "prop-types";
 import "./Header.css";
-function Header({ weatherData, onAddClick }) {
+
+function Header({ onAddClick }) {
   return (
     <header>
       <button type="button" onClick={onAddClick}>
@@ -8,5 +10,9 @@ function Header({ weatherData, onAddClick }) {
     </header>
   );
 }
+
+Header.propTypes = {
+  onAddClick: PropTypes.func.isRequired,
+};
 
 export default Header;

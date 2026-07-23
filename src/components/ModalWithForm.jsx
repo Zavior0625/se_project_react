@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "./ModalWithForm.css";
 import { useEffect } from "react";
 
@@ -41,5 +42,14 @@ function ModalWithForm({ title, buttonText, name, children, isOpen, onClose }) {
     </div>
   );
 }
+
+ModalWithForm.propTypes = {
+  title: PropTypes.string.isRequired,
+  buttonText: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default ModalWithForm;

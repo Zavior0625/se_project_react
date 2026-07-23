@@ -1,11 +1,24 @@
+import PropTypes from "prop-types";
+import "./ItemCard.css";
+
 function ItemCard({ item, onCardClick }) {
   return (
     <li onClick={() => onCardClick(item)}>
-      <h3>{item.name}</h3>
-      <img src={item.link} alt={item.name} width="100" />
+      <p>{item.name}</p>
+      <img src={item.link} alt={item.name} />
       <p>{item.weather}</p>
     </li>
   );
 }
+
+ItemCard.propTypes = {
+  item: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+    weather: PropTypes.string.isRequired,
+  }).isRequired,
+  onCardClick: PropTypes.func.isRequired,
+};
 
 export default ItemCard;

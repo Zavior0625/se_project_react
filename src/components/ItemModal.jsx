@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "./ModalWithForm.css";
 
 function ItemModal({ card, isOpen, onClose }) {
@@ -11,14 +12,23 @@ function ItemModal({ card, isOpen, onClose }) {
           ×
         </button>
 
-        <img className="modal__image" src={card.link} alt={card.name} />
+        <img src={card.link} alt={card.name} />
 
-        <h2 className="modal__title">{card.name}</h2>
-
-        <p className="modal__weather">Weather: {card.weather}</p>
+        <h2>{card.name}</h2>
+        <p>Weather: {card.weather}</p>
       </div>
     </div>
   );
 }
+
+ItemModal.propTypes = {
+  card: PropTypes.shape({
+    name: PropTypes.string,
+    link: PropTypes.string,
+    weather: PropTypes.string,
+  }).isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default ItemModal;
