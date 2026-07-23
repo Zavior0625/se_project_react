@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import "./ModalWithForm.css";
+import "./ItemModal.css";
 
 function ItemModal({ card, isOpen, onClose }) {
   return (
