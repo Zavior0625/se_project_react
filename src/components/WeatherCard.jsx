@@ -1,13 +1,34 @@
 import PropTypes from "prop-types";
 import "./WeatherCard.css";
+import sunny from "../assets/images/weather-sunny.svg";
+import cloudy from "../assets/images/weather-cloud.svg";
 
 function WeatherCard({ weatherData }) {
-  return <section>{weatherData.temperature}°</section>;
+  const temperature =
+    typeof weatherData.temperature === "number"
+      ? `${Math.round(weatherData.temperature)}°F`
+      : "Loading...";
+
+  const weatherImage =
+    weatherData.type === "hot" || weatherData.type === "warm" ? sunny : cloudy;
+
+  return (
+    <section className="weather-card">
+      <p className="weather-card__temp">{temperature}</p>
+
+      <img
+        className="weather-card__image"
+        src={weatherImage}
+        alt="Weather illustration"
+      />
+    </section>
+  );
 }
 
 WeatherCard.propTypes = {
   weatherData: PropTypes.shape({
     temperature: PropTypes.number,
+    type: PropTypes.string,
   }).isRequired,
 };
 

@@ -3,10 +3,10 @@ import "./ItemCard.css";
 
 function ItemCard({ item, onCardClick }) {
   return (
-    <li onClick={() => onCardClick(item)}>
-      <p>{item.name}</p>
-      <img src={item.link} alt={item.name} />
-      <p>{item.weather}</p>
+    <li className="card" onClick={() => onCardClick(item)}>
+      <p className="card__name">{item.name}</p>
+
+      <img className="card__image" src={item.link} alt={item.name} />
     </li>
   );
 }

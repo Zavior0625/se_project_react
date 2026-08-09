@@ -33,8 +33,8 @@ function App() {
       .then((data) => {
         setWeatherData({
           temperature: data.main.temp,
-          city: data.name,
           type: getWeatherCondition(data.main.temp),
+          city: data.name,
         });
       })
       .catch(console.error);

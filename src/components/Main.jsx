@@ -4,19 +4,27 @@ import WeatherCard from "./WeatherCard";
 import ItemCard from "./ItemCard";
 
 function Main({ clothingItems, weatherData, onCardClick }) {
-  const filteredItems = clothingItems.filter(
-    (item) => item.weather.toLowerCase() === weatherData.type,
-  );
+  const filteredItems = weatherData.type
+    ? clothingItems.filter(
+        (item) => item.weather.toLowerCase() === weatherData.type.toLowerCase(),
+      )
+    : clothingItems;
 
   return (
-    <main>
+    <main className="main">
       <WeatherCard weatherData={weatherData} />
 
-      <ul>
-        {filteredItems.map((item) => (
-          <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
-        ))}
-      </ul>
+      <section className="cards">
+        <p className="cards__text">
+          Today is {weatherData.type || "..."}. You may want to wear:
+        </p>
+
+        <ul className="cards__list">
+          {filteredItems.map((item) => (
+            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }
