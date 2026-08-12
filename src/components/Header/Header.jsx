@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import "./Header.css";
-import logo from "../assets/images/Logo.svg";
-import avatar from "../assets/images/avatar.svg";
+import logo from "../../assets/images/Logo.svg";
+import avatar from "../../assets/images/avatar.svg";
 
 function Header({ weatherData, onAddClick }) {
   const currentDate = new Date().toLocaleDateString("en-US", {

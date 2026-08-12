@@ -5,6 +5,18 @@
   text-align: center;
 }
 
+.app {
+  min-height: 100vh;
+  background-color: #f3f3f3;
+}
+
+.page__container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

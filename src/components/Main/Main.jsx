@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import "./Main.css";
-import WeatherCard from "./WeatherCard";
-import ItemCard from "./ItemCard";
+import WeatherCard from "../WeatherCard/WeatherCard";
+import ItemCard from "../ItemCard/ItemCard";
 
 function Main({ clothingItems, weatherData, onCardClick }) {
   const filteredItems = weatherData.type

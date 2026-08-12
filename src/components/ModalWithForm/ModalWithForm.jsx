@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import "./ModalWithForm.css";
 import { useEffect } from "react";
+import closeIcon from "../../assets/images/close-icon.svg";
 
 function ModalWithForm({ title, buttonText, name, children, isOpen, onClose }) {
   useEffect(() => {
@@ -26,7 +27,7 @@ function ModalWithForm({ title, buttonText, name, children, isOpen, onClose }) {
     >
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <button type="button" className="modal__close" onClick={onClose}>
-          ×
+          <img className="modal__close-icon" src={closeIcon} alt="Close" />
         </button>
 
         <h2 className="modal__title">{title}</h2>

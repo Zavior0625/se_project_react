@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import "./WeatherCard.css";
-import sunny from "../assets/images/weather-sunny.svg";
-import cloudy from "../assets/images/weather-cloud.svg";
+import sunny from "../../assets/images/weather-sunny.svg";
+import cloudy from "../../assets/images/weather-cloud.svg";
 
 function WeatherCard({ weatherData }) {
   const temperature =
