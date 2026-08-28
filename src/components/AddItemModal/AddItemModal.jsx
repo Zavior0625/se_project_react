@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
+import "./AddItemModal.css";
 
 function AddItemModal({ isOpen, onAddItem, onClose }) {
   const { values, handleChange, resetForm } = useForm({
