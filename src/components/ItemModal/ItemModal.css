@@ -1,5 +1,7 @@
 .modal__content_type_image {
+  position: relative;
   width: 498px;
+  padding: 0;
   overflow: hidden;
   border-radius: 20px;
   background-color: #fff;
@@ -13,7 +15,11 @@
 }
 
 .modal__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 20px 32px 32px;
+  background-color: #fff;
 }
 
 .modal__caption,
@@ -22,10 +28,22 @@
   font-size: 20px;
   line-height: 24px;
   font-weight: 700;
+  text-align: left;
 }
 
 .modal__weather {
   margin-top: 12px;
+}
+
+.modal__delete-button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #ff4d00;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+  cursor: pointer;
 }
 
 .modal__close {
@@ -36,6 +54,7 @@
   border: none;
   background: transparent;
   cursor: pointer;
+  z-index: 2;
 }
 
 .modal__close-icon {

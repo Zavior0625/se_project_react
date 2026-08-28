@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import PropTypes from "prop-types";
 import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
 function Main({ clothingItems, weatherData, onCardClick }) {
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+
   const filteredItems = weatherData.type
     ? clothingItems.filter(
         (item) => item.weather.toLowerCase() === weatherData.type.toLowerCase(),
@@ -16,7 +20,11 @@ function Main({ clothingItems, weatherData, onCardClick }) {
 
       <section className="cards">
         <p className="cards__text">
-          Today is {weatherData.type || "..."}. You may want to wear:
+          Today is{" "}
+          {weatherData.temperature
+            ? `${weatherData.temperature[currentTemperatureUnit]}°${currentTemperatureUnit}`
+            : "..."}
+          . You may want to wear:
         </p>
 
         <ul className="cards__list">
@@ -32,13 +40,18 @@ function Main({ clothingItems, weatherData, onCardClick }) {
 Main.propTypes = {
   clothingItems: PropTypes.arrayOf(
     PropTypes.shape({
-      _id: PropTypes.string.isRequired,
+      _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       name: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
+      imageUrl: PropTypes.string.isRequired,
       weather: PropTypes.string.isRequired,
     }),
   ).isRequired,
+
   weatherData: PropTypes.shape({
+    temperature: PropTypes.shape({
+      F: PropTypes.number,
+      C: PropTypes.number,
+    }),
     type: PropTypes.string,
   }).isRequired,
   onCardClick: PropTypes.func.isRequired,

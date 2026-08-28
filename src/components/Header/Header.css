@@ -48,3 +48,19 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.header__profile-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #000;
+  text-decoration: none;
+}
+
+.header__profile-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #000;
+  text-decoration: none;
+}

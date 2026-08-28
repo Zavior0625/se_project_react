@@ -1,0 +1,59 @@
+.toggle-switch {
+  position: relative;
+  width: 56px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid #7e7e7e;
+  border-radius: 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.toggle-switch__checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-switch__circle {
+  position: absolute;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #000;
+  transition: left 0.2s ease;
+}
+
+.toggle-switch__checkbox:checked + .toggle-switch__circle {
+  left: 26px;
+}
+
+.toggle-switch__text {
+  position: relative;
+  z-index: 1;
+  width: 28px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.toggle-switch__text_f {
+  color: #fff;
+}
+
+.toggle-switch__text_c {
+  color: #7e7e7e;
+}
+
+.toggle-switch__checkbox:checked ~ .toggle-switch__text_f {
+  color: #7e7e7e;
+}
+
+.toggle-switch__checkbox:checked ~ .toggle-switch__text_c {
+  color: #fff;
+}
