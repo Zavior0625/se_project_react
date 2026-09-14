@@ -69,18 +69,35 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getWeather()
-      .then((data) => {
-        setWeatherData({
-          temperature: {
-            F: data.main.temp,
-            C: Math.round(((data.main.temp - 32) * 5) / 9),
-          },
-          type: getWeatherCondition(data.main.temp),
-          city: data.name,
-        });
-      })
-      .catch(console.error);
+    if (!navigator.geolocation) {
+      console.error("Geolocation is not supported by this browser.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const coordinates = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        };
+
+        getWeather(coordinates)
+          .then((data) => {
+            setWeatherData({
+              temperature: {
+                F: data.main.temp,
+                C: Math.round(((data.main.temp - 32) * 5) / 9),
+              },
+              type: getWeatherCondition(data.main.temp),
+              city: data.name,
+            });
+          })
+          .catch(console.error);
+      },
+      (error) => {
+        console.error("Error getting geolocation:", error);
+      },
+    );
   }, []);
 
   return (

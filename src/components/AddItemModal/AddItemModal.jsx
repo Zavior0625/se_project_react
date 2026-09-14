@@ -1,14 +1,23 @@
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import "./AddItemModal.css";
 
+const initialValues = {
+  name: "",
+  imageUrl: "",
+  weather: "",
+};
+
 function AddItemModal({ isOpen, onAddItem, onClose }) {
-  const { values, handleChange, resetForm } = useForm({
-    name: "",
-    imageUrl: "",
-    weather: "",
-  });
+  const { values, handleChange, resetForm } = useForm(initialValues);
+
+  useEffect(() => {
+    if (isOpen) {
+      resetForm();
+    }
+  }, [isOpen, resetForm]);
 
   function handleSubmit(event) {
     event.preventDefault();
