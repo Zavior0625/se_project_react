@@ -5,7 +5,7 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-function Main({ clothingItems, weatherData, onCardClick }) {
+function Main({ clothingItems, weatherData, onCardClick, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const filteredItems = weatherData.type
@@ -29,7 +29,12 @@ function Main({ clothingItems, weatherData, onCardClick }) {
 
         <ul className="cards__list">
           {filteredItems.map((item) => (
-            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+            <ItemCard
+              key={item._id}
+              item={item}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+            />
           ))}
         </ul>
       </section>
@@ -55,6 +60,7 @@ Main.propTypes = {
     type: PropTypes.string,
   }).isRequired,
   onCardClick: PropTypes.func.isRequired,
+  onCardLike: PropTypes.func.isRequired,
 };
 
 export default Main;

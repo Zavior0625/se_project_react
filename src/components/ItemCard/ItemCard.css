@@ -28,3 +28,19 @@
   display: block;
   object-fit: cover;
 }
+
+.card__like-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  border: none;
+  background: transparent;
+  color: #b6b6b6;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.card__like-button_active {
+  color: #ff0000;
+}

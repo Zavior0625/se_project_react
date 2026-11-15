@@ -1,15 +1,24 @@
 import PropTypes from "prop-types";
 import "./Header.css";
 import logo from "../../assets/images/Logo.svg";
-import avatar from "../../assets/images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 
-function Header({ weatherData, onAddClick }) {
+function Header({
+  weatherData,
+  onAddClick,
+  onLoginClick,
+  onRegisterClick,
+  isLoggedIn,
+  currentUser,
+}) {
   const currentDate = new Date().toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
   });
+
+  const userName = currentUser?.name || "";
+  const userAvatar = currentUser?.avatar;
 
   return (
     <header className="header">
@@ -26,18 +35,51 @@ function Header({ weatherData, onAddClick }) {
       <div className="header__right">
         <ToggleSwitch />
 
-        <button
-          type="button"
-          className="header__add-clothes-btn"
-          onClick={onAddClick}
-        >
-          + Add clothes
-        </button>
+        {isLoggedIn ? (
+          <>
+            <button
+              type="button"
+              className="header__add-clothes-btn"
+              onClick={onAddClick}
+            >
+              + Add clothes
+            </button>
 
-        <Link to="/profile" className="header__profile-link">
-          <p className="header__username">Auzam Awan</p>
-          <img className="header__avatar" src={avatar} alt="Auzam Awan" />
-        </Link>
+            <Link to="/profile" className="header__profile-link">
+              <p className="header__username">{userName}</p>
+
+              {userAvatar ? (
+                <img
+                  className="header__avatar"
+                  src={userAvatar}
+                  alt={userName}
+                />
+              ) : (
+                <div className="header__avatar-placeholder">
+                  {userName.charAt(0).toUpperCase()}
+                </div>
+              )}
+            </Link>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              className="header__auth-btn"
+              onClick={onRegisterClick}
+            >
+              Sign Up
+            </button>
+
+            <button
+              type="button"
+              className="header__auth-btn"
+              onClick={onLoginClick}
+            >
+              Log In
+            </button>
+          </>
+        )}
       </div>
     </header>
   );
@@ -48,6 +90,13 @@ Header.propTypes = {
     city: PropTypes.string,
   }).isRequired,
   onAddClick: PropTypes.func.isRequired,
+  onLoginClick: PropTypes.func.isRequired,
+  onRegisterClick: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
+  currentUser: PropTypes.shape({
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
 };
 
 export default Header;
