@@ -11,3 +11,9 @@ Currently, two official plugins are available:
  
  Check out [this video](https://drive.google.com/file/d/1X-BkYZUizFeVLGuzPiDQNfNzyV9-JEAJ/view?usp=sharing), where I describe my 
  project.
+## Backend Repository
+
+The WTWR frontend uses an Express.js and MongoDB backend for user authentication, profile management, and clothing item management.
+
+Backend GitHub Repository:
+https://github.com/Zavior0625/se_project_express

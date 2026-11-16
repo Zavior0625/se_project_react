@@ -1,8 +1,16 @@
+import { useContext } from "react";
 import PropTypes from "prop-types";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./ItemModal.css";
 import closeIcon from "../../assets/images/close-icon.svg";
 
 function ItemModal({ card, isOpen, onClose, onCardDelete }) {
+  const currentUser = useContext(CurrentUserContext);
+
+  const isOwn =
+    Boolean(currentUser?._id) &&
+    String(card?.owner?._id || card?.owner) === String(currentUser._id);
+
   return (
     <div
       className={`modal ${isOpen ? "modal_is-opened" : ""}`}
@@ -28,13 +36,15 @@ function ItemModal({ card, isOpen, onClose, onCardDelete }) {
             <p className="modal__weather">Weather: {card.weather}</p>
           </div>
 
-          <button
-            type="button"
-            className="modal__delete-button"
-            onClick={() => onCardDelete(card)}
-          >
-            Delete item
-          </button>
+          {isOwn && (
+            <button
+              type="button"
+              className="modal__delete-button"
+              onClick={() => onCardDelete(card)}
+            >
+              Delete item
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -44,6 +54,12 @@ function ItemModal({ card, isOpen, onClose, onCardDelete }) {
 ItemModal.propTypes = {
   card: PropTypes.shape({
     _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    owner: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        _id: PropTypes.string,
+      }),
+    ]),
     name: PropTypes.string,
     link: PropTypes.string,
     imageUrl: PropTypes.string,

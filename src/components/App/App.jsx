@@ -97,7 +97,6 @@ function App() {
   }
 
   function handleEditProfileClick() {
-    console.log("Edit Profile button clicked!");
     setActiveModal("edit-profile");
   }
 
