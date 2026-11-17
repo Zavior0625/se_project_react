@@ -85,7 +85,7 @@ function App() {
     localStorage.removeItem("jwt");
     setCurrentUser(null);
     setIsLoggedIn(false);
-    setActiveModal("");
+    handleCloseModal();
   }
 
   function handleRegisterClick() {
@@ -234,7 +234,6 @@ function App() {
               onLoginClick={handleLoginClick}
               onRegisterClick={handleRegisterClick}
               isLoggedIn={isLoggedIn}
-              currentUser={currentUser}
             />
 
             <Routes>
@@ -277,19 +276,20 @@ function App() {
             isOpen={activeModal === "register"}
             onClose={handleCloseModal}
             onRegister={handleRegister}
+            onLoginClick={handleLoginClick}
           />
 
           <LoginModal
             isOpen={activeModal === "login"}
             onClose={handleCloseModal}
             onLogin={handleLogin}
+            onRegisterClick={handleRegisterClick}
           />
 
           <EditProfileModal
             isOpen={activeModal === "edit-profile"}
             onClose={handleCloseModal}
             onUpdateUser={handleUpdateUser}
-            currentUser={currentUser}
           />
 
           <AddItemModal

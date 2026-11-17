@@ -148,3 +148,28 @@
   accent-color: #000;
   cursor: pointer;
 }
+
+/* Authentication modal buttons */
+
+.modal__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.modal__secondary-button {
+  padding: 8px 0;
+  border: none;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.modal__secondary-button:hover {
+  color: #000;
+}

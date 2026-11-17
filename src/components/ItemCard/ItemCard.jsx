@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import PropTypes from "prop-types";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import heartOutline from "../../assets/images/heart-outline.svg";
+import heartFilled from "../../assets/images/heart-filled.svg";
 import "./ItemCard.css";
 
 function ItemCard({ item, onCardClick, onCardLike }) {
@@ -15,20 +17,24 @@ function ItemCard({ item, onCardClick, onCardLike }) {
 
   return (
     <li className="card" onClick={() => onCardClick(item)}>
-      <p className="card__name">{item.name}</p>
+      <div className="card__header">
+        <p className="card__name">{item.name}</p>
 
-      {currentUser && (
-        <button
-          type="button"
-          className={`card__like-button ${
-            isLiked ? "card__like-button_active" : ""
-          }`}
-          onClick={handleLikeClick}
-          aria-label={isLiked ? "Unlike item" : "Like item"}
-        >
-          ♥
-        </button>
-      )}
+        {currentUser && (
+          <button
+            type="button"
+            className="card__like-button"
+            onClick={handleLikeClick}
+            aria-label={isLiked ? "Unlike item" : "Like item"}
+          >
+            <img
+              src={isLiked ? heartFilled : heartOutline}
+              alt=""
+              className="card__like-icon"
+            />
+          </button>
+        )}
+      </div>
 
       <img className="card__image" src={item.imageUrl} alt={item.name} />
     </li>

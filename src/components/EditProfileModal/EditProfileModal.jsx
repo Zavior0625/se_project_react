@@ -1,21 +1,32 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { useForm } from "../../hooks/useForm";
 
-function EditProfileModal({ isOpen, onClose, onUpdateUser, currentUser }) {
-  const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("");
+function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
+  const currentUser = useContext(CurrentUserContext);
+
+  const { values, handleChange, resetForm } = useForm({
+    name: "",
+    avatar: "",
+  });
 
   useEffect(() => {
     if (isOpen && currentUser) {
-      setName(currentUser.name || "");
-      setAvatar(currentUser.avatar || "");
+      resetForm({
+        name: currentUser.name || "",
+        avatar: currentUser.avatar || "",
+      });
     }
-  }, [isOpen, currentUser]);
+  }, [isOpen, currentUser, resetForm]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    onUpdateUser({ name, avatar });
+    onUpdateUser({
+      name: values.name,
+      avatar: values.avatar,
+    });
   }
 
   return (
@@ -31,9 +42,10 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser, currentUser }) {
         Name
         <input
           type="text"
+          name="name"
           className="modal__input"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={values.name}
+          onChange={handleChange}
           required
         />
       </label>
@@ -42,9 +54,10 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser, currentUser }) {
         Avatar URL
         <input
           type="url"
+          name="avatar"
           className="modal__input"
-          value={avatar}
-          onChange={(e) => setAvatar(e.target.value)}
+          value={values.avatar}
+          onChange={handleChange}
           required
         />
       </label>
@@ -56,10 +69,6 @@ EditProfileModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onUpdateUser: PropTypes.func.isRequired,
-  currentUser: PropTypes.shape({
-    name: PropTypes.string,
-    avatar: PropTypes.string,
-  }),
 };
 
 export default EditProfileModal;

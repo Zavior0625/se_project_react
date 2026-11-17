@@ -1,21 +1,23 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useForm } from "../../hooks/useForm";
 
-function RegisterModal({ isOpen, onClose, onRegister }) {
-  const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function RegisterModal({ isOpen, onClose, onRegister, onLoginClick }) {
+  const { values, handleChange } = useForm({
+    name: "",
+    avatar: "",
+    email: "",
+    password: "",
+  });
 
   function handleSubmit(evt) {
     evt.preventDefault();
 
     onRegister({
-      name,
-      avatar,
-      email,
-      password,
+      name: values.name,
+      avatar: values.avatar,
+      email: values.email,
+      password: values.password,
     });
   }
 
@@ -27,14 +29,17 @@ function RegisterModal({ isOpen, onClose, onRegister }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      secondaryButtonText="Log In"
+      onSecondaryClick={onLoginClick}
     >
       <label className="modal__label">
         Email
         <input
           type="email"
+          name="email"
           className="modal__input"
-          value={email}
-          onChange={(evt) => setEmail(evt.target.value)}
+          value={values.email}
+          onChange={handleChange}
           required
         />
       </label>
@@ -43,9 +48,10 @@ function RegisterModal({ isOpen, onClose, onRegister }) {
         Password
         <input
           type="password"
+          name="password"
           className="modal__input"
-          value={password}
-          onChange={(evt) => setPassword(evt.target.value)}
+          value={values.password}
+          onChange={handleChange}
           required
         />
       </label>
@@ -54,9 +60,10 @@ function RegisterModal({ isOpen, onClose, onRegister }) {
         Name
         <input
           type="text"
+          name="name"
           className="modal__input"
-          value={name}
-          onChange={(evt) => setName(evt.target.value)}
+          value={values.name}
+          onChange={handleChange}
           required
         />
       </label>
@@ -65,9 +72,10 @@ function RegisterModal({ isOpen, onClose, onRegister }) {
         Avatar URL
         <input
           type="url"
+          name="avatar"
           className="modal__input"
-          value={avatar}
-          onChange={(evt) => setAvatar(evt.target.value)}
+          value={values.avatar}
+          onChange={handleChange}
           required
         />
       </label>
@@ -79,6 +87,7 @@ RegisterModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onRegister: PropTypes.func.isRequired,
+  onLoginClick: PropTypes.func.isRequired,
 };
 
 export default RegisterModal;

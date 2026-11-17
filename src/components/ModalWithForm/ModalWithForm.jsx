@@ -11,6 +11,8 @@ function ModalWithForm({
   isOpen,
   onClose,
   onSubmit,
+  secondaryButtonText,
+  onSecondaryClick,
 }) {
   useEffect(() => {
     if (!isOpen) return;
@@ -43,9 +45,21 @@ function ModalWithForm({
         <form className="modal__form" name={name} onSubmit={onSubmit}>
           {children}
 
-          <button type="submit" className="modal__submit">
-            {buttonText}
-          </button>
+          <div className="modal__actions">
+            <button type="submit" className="modal__submit">
+              {buttonText}
+            </button>
+
+            {secondaryButtonText && (
+              <button
+                type="button"
+                className="modal__secondary-button"
+                onClick={onSecondaryClick}
+              >
+                {secondaryButtonText}
+              </button>
+            )}
+          </div>
         </form>
       </div>
     </div>
@@ -60,6 +74,8 @@ ModalWithForm.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func,
+  secondaryButtonText: PropTypes.string,
+  onSecondaryClick: PropTypes.func,
 };
 
 export default ModalWithForm;

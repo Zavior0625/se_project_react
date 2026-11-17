@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import PropTypes from "prop-types";
 import "./Header.css";
 import logo from "../../assets/images/Logo.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Header({
   weatherData,
@@ -10,8 +12,9 @@ function Header({
   onLoginClick,
   onRegisterClick,
   isLoggedIn,
-  currentUser,
 }) {
+  const currentUser = useContext(CurrentUserContext);
+
   const currentDate = new Date().toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
@@ -93,10 +96,6 @@ Header.propTypes = {
   onLoginClick: PropTypes.func.isRequired,
   onRegisterClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
-  currentUser: PropTypes.shape({
-    name: PropTypes.string,
-    avatar: PropTypes.string,
-  }),
 };
 
 export default Header;

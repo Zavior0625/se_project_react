@@ -1,17 +1,19 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useForm } from "../../hooks/useForm";
 
-function LoginModal({ isOpen, onClose, onLogin }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function LoginModal({ isOpen, onClose, onLogin, onRegisterClick }) {
+  const { values, handleChange } = useForm({
+    email: "",
+    password: "",
+  });
 
   function handleSubmit(evt) {
     evt.preventDefault();
 
     onLogin({
-      email,
-      password,
+      email: values.email,
+      password: values.password,
     });
   }
 
@@ -23,14 +25,17 @@ function LoginModal({ isOpen, onClose, onLogin }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      secondaryButtonText="Sign Up"
+      onSecondaryClick={onRegisterClick}
     >
       <label className="modal__label">
         Email
         <input
           type="email"
+          name="email"
           className="modal__input"
-          value={email}
-          onChange={(evt) => setEmail(evt.target.value)}
+          value={values.email}
+          onChange={handleChange}
           required
         />
       </label>
@@ -39,9 +44,10 @@ function LoginModal({ isOpen, onClose, onLogin }) {
         Password
         <input
           type="password"
+          name="password"
           className="modal__input"
-          value={password}
-          onChange={(evt) => setPassword(evt.target.value)}
+          value={values.password}
+          onChange={handleChange}
           required
         />
       </label>
@@ -53,6 +59,7 @@ LoginModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onLogin: PropTypes.func.isRequired,
+  onRegisterClick: PropTypes.func.isRequired,
 };
 
 export default LoginModal;

@@ -21,3 +21,31 @@
   font-size: 20px;
   font-weight: 700;
 }
+
+.sidebar__edit-button,
+.sidebar__logout-button {
+  align-self: flex-start;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #000;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sidebar__edit-button {
+  margin-top: 16px;
+}
+
+.sidebar__logout-button {
+  margin-top: 8px;
+}
+
+.sidebar__edit-button:hover,
+.sidebar__logout-button:hover {
+  opacity: 0.6;
+}
